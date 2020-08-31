@@ -1,7 +1,7 @@
 # google-colab-ssh
 Contain bash script to clone private Github repository in Google Colab
 
-Detail Blog post can be found [here](https://medium.com/@purba0101/how-to-clone-private-github-repo-in-google-colab-using-ssh-77384cfef18f)
+Detail blog post can be found [here](https://medium.com/@purba0101/how-to-clone-private-github-repo-in-google-colab-using-ssh-77384cfef18f)
 
 # Usage 
 
