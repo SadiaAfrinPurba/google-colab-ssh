@@ -1,19 +1,37 @@
-import argparse
 from subprocess import call
 
+from pyngrok import ngrok
 
-def get_args():
-    parser = argparse.ArgumentParser("ArgumentParser to clone a private Github repository from Google Colab.")
 
-    parser.add_argument('--name', type=str, help='Give name for Git config settings')
-    parser.add_argument('--email', type=str, help='Give valid email address for Git config settings')
+def clone_github_private_repo(email: str, name: str) -> None:
+    private_repo_commands = f'sh scripts/private_repo_clone.sh {email} {name}'
+    call(private_repo_commands.split())
 
-    args = parser.parse_args()
 
-    return args
+def connect_ngork():
+    url = ngrok.connect(port=9000)
+    return url
 
 
 if __name__ == '__main__':
-    args = get_args()
-    commands = f'sh private_repo_clone.sh {args.email} {args.name}'
-    call(commands.split())
+    url = connect_ngork()
+    print('Installing code-server for Google Colab')
+    code_server_install_command = f'sh scripts/code_server_install.sh'
+    call(code_server_install_command.split())
+
+    option = input('Do you want to clone private repository from Github? (yes/no) [default: yes]: ')
+
+    if option.lower() not in ('yes', 'y', 'no', 'n'):
+        print('Invalid option.')
+
+    if option.lower() in ('n', 'no'):
+        print('Go to below address to use code-server')
+        print(url)
+
+    email = input('Give email address for git config settings: ')
+    name = input('Give name for git config settings: ')
+    clone_github_private_repo(email, name)
+    print('Add SSH key to your GitHub account')
+
+    print('Now go to below address to use code-server')
+    print(url)
