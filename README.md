@@ -10,7 +10,7 @@ Detail blog post can be found [here](https://medium.com/@purba0101/how-to-clone-
 2. Run the script with your email address and name
 
 ```
-cd google-colab-ssh
+cd scripts
 sh private_repo_clone.sh "your_email@example.com" "Your Name"
 
 ```
